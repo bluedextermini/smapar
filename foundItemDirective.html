@@ -1,0 +1,15 @@
+<div style="margin-top:84px">
+
+  <div class="list-group" >
+    <a ng-repeat='item in fid.found' href="#" class="list-group-item">
+      <h4 class="list-group-item-heading">{{item.name}}, {{item.short_name}},</h4>
+      <p class="list-group-item-text">{{item.description}}</p>
+      <button  ng-click="fid.onRemove({index:$index});">Don't want this one!</button>
+    </a>
+  </div>
+  <li ng-if='fid.found.length===0' class="list-group-item">
+      <div class="alert alert-danger" role="alert">Nothing found</div>
+  </li>
+
+
+</div

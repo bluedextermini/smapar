@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Smart Parking Lot System</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <script src="angular.min.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+    <body ng-app='NarrowItDownApp' ng-controller='NarrowItDownController as search'>
+        <div class="navbar-brand">Smart Parking System</div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">SPS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">
+                            Home <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Parking Status </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Utilisation Report</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <div class="container">
+
+               
+                    <div class="livecont">
+                        <div class="light blink"></div>
+                        LIVE
+    
+                    </div>
+              
+
+            <h1>
+            
+                Parking Status  
+      
+    
+            
+            </h1>
+            <div class="form-group">
+                <input type="text" placeholder="search term" ng-model='search.searchTerm' class="form-control">
+            </div>
+            <div class="form-group narrow-button">
+                <button class="btn btn-primary" ng-click='search.narrowItDown()'>Narrow It Down For Me!</button>
+            </div>
+            <!-- found-items should be implemented as a component -->
+            <!--     <found-items ng-if='search.isButtonClicked' found='search.found' on-remove='search.remove(index)'></found-items> -->
+            <table class="table">
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-success">Parking 1</button>
+                    </td>
+                </tr>
+                <td>
+                    <button type="button" class="btn btn-danger">Parking 2</button>
+                </td>
+                <tr></tr>
+            </table>
+        </div>
+    </body>
+</html>
