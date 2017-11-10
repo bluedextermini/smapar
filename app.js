@@ -1,88 +1,51 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular.module('SmartParkingSystem',[])
-  .service('MenuSearchService', MenuSearchService)
-  .controller('NarrowItDownController',  NarrowItDownController)
-  .directive('foundItems',FoundItemsDirective);
+    angular.module('SmartParkingSystem', []).service('ParkingStatusService', ParkingStatusService).controller('ParkingStatus', ParkingStatus);
 
-  //directive definition
-  function FoundItemsDirective(){
-    var ddo={
-       templateUrl:'foundItemDirective.html',
-       scope:{
-             found:'<',
-             onRemove:'&'
-       },
-      controller :FoundItemsDirectiveController,
-      controllerAs : 'fid',
-      bindToController : true
-    };
-    return ddo;
-  }
+    ParkingStatus.$inject = ['ParkingStatusService'];
+    function ParkingStatus(ParkingStatusService) {
+        var status = this;
+        //search.searchTerm="";
+        status.found = [];
+        status.isButtonClicked = false;
 
-  function FoundItemsDirectiveController(){
-    var directiveCtrl=this;
+        //logic narrowItDown button
+        status.refresh = function() {
+            //get matched item from service
+            ParkingStatusService.getParkingsStatus().then(function(result) {
+                status.found =JSON.stringify(result);
+            }).catch(function(error) {
+                status.isButtonClicked = true;
+                console.log("some error occured at controller");
+            });
+        }
 
-    console.log('directive ::fid.found.length::',directiveCtrl.found.length);
-
-  }
-
-  NarrowItDownController.$inject=['MenuSearchService'];
-  function NarrowItDownController(MenuSearchService){
-    var search=this;
-    search.searchTerm="";
-    search.found=[];
-    search.isButtonClicked=false;
-
-    //logic narrowItDown button
-    search.narrowItDown=function(){
-
-
-      //get matched item from service
-      MenuSearchService.getMatchedMenuItems(search.searchTerm).then(function(result){
-        search.found=result;
-        search.isButtonClicked=true;
-      })
-      .catch(function(error){
-        search.isButtonClicked=true;
-        console.log("some error occured at controller");
-      });
+        return status;
     }
 
-    //remove item from found array
-    search.remove=function(index){
-      search.found.splice(index,1);
+    ParkingStatusService.$inject = ['$http', '$q'];
+    //service definition
+    function ParkingStatusService($http, $q) {
+        var service = this;
+
+        service.getParkingsStatus = function() {
+            var deferred = $q.defer();
+            //service.searchTerm=searchTerm;
+            $http({
+                url: "http://demo6742418.mockable.io/parkingsStatus",
+                method: 'GET'
+            }).then(function(result) {
+                var parkingsStatus = result.data.parkingStatus;
+                //logic to find match item list array
+                //service.parkingStatus=parkingStatus.filter(isMatchFound);
+                deferred.resolve(parkingsStatus);
+            }).catch(function(error) {
+                deferred.reject("Some Error occurred");
+            });
+            return deferred.promise;
+        }
+
     }
-    return search;
-  }
-
-  MenuSearchService.$inject=['$http','$q'];
-  //service definition
-  function MenuSearchService($http, $q){
-      var service=this;
-
-      service.getMatchedMenuItems=function(searchTerm){
-          var deferred = $q.defer();
-          service.searchTerm=searchTerm;
-          $http({
-               url : "https://davids-restaurant.herokuapp.com/menu_items.json?searchTerm",
-               method: 'GET'
-         }).then(function (result) {
-               var menuItems= result.data.menu_items;
-               //logic to find match item list array
-               service.founditems=menuItems.filter(isMatchFound);
-               deferred.resolve(service.founditems);
-         })
-         .catch(function(error){
-           deferred.reject("Some Error occurred");
-         });
-         return deferred.promise;
-      }
-
-      var isMatchFound=function(value){
-          return (service.searchTerm.length!=0 && value.description.toLowerCase().indexOf(service.searchTerm)>-1)?true:false;
-      }
-}
 
 }());

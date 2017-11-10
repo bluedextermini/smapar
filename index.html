@@ -8,7 +8,7 @@
     </head>
     <script src="angular.min.js" charset="utf-8"></script>
     <script src="app.js" charset="utf-8"></script>
-    <body ng-app='NarrowItDownApp' ng-controller='NarrowItDownController as search'>
+    <body ng-app='SmartParkingSystem' ng-controller='ParkingStatus as parkingStatus'>
         <div class="navbar-brand">Smart Parking System</div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">SPS</a>
@@ -36,41 +36,43 @@
             </div>
         </nav>
         <div class="container">
-
-               
-                    <div class="livecont">
-                        <div class="light blink"></div>
-                        LIVE
+            <div class="livecont">
+                <div class="light blink"></div>
+                LIVE
     
-                    </div>
-              
-
-            <h1>
-            
-                Parking Status  
+                    
+            </div>
+            <h1>Parking Status  
       
     
             
             </h1>
-            <div class="form-group">
-                <input type="text" placeholder="search term" ng-model='search.searchTerm' class="form-control">
+            
+      
+              <div class="form-group">
+                <label>Parking Status Result:</label>
+                <input type="textArea" placeholder="Place Holder for search result" ng-model='parkingStatus.found' class="form-control">
             </div>
+
             <div class="form-group narrow-button">
-                <button class="btn btn-primary" ng-click='search.narrowItDown()'>Narrow It Down For Me!</button>
+                <button class="btn btn-primary" ng-click='parkingStatus.refresh()'>Refresh Parking Data!</button>
             </div>
             <!-- found-items should be implemented as a component -->
             <!--     <found-items ng-if='search.isButtonClicked' found='search.found' on-remove='search.remove(index)'></found-items> -->
             <table class="table">
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-success">Parking 1</button>
+                        <button type="button"  ng-class="{'btn btn-danger':false, 'btn btn-success':true}" >Parking 1</button>
                     </td>
+                    
                 </tr>
                 <td>
-                    <button type="button" class="btn btn-danger">Parking 2</button>
+                    <button type="button" ng-class="{'btn btn-danger':false, 'btn btn-success':true}">Parking 2</button>
                 </td>
                 <tr></tr>
             </table>
+
         </div>
+
     </body>
 </html>
