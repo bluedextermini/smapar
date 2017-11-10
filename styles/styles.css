@@ -184,3 +184,21 @@ div#car4 {
     left: 52%;
     position: relative;
 }
+
+
+div#pulse {
+    width: 5px;
+    height: 5px;
+    border-radius: 9px;
+    animation: out 1.5s infinite ease-out;
+    background: #000;
+    position: fixed;
+    top: 41%;
+    left: 50%;
+    margin: -25px 0px 0px -25px;
+}
+
+@keyframes out {
+  0% {box-shadow: 0px 0px 0px 0px rgba(888, 0, 0, 1);} 
+  100% {box-shadow: 0px 0px 0px 50px rgba(0, 0, 0, 0.0);}
+}
