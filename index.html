@@ -29,6 +29,8 @@
                         <a class="nav-link" href="#">Utilisation Report</a>
                     </li>
                 </ul>
+
+               
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -41,19 +43,39 @@
                 LIVE
     
                     
+            
+            
+            
             </div>
             <h1>Parking Status  
       
     
             
             </h1>
-            
-      
-              <div class="form-group">
+             <div id='carParkingStatus'>
+                
+                <image class='parking' src='./asset/parking.svg'/>
+                <div id='car1'>
+                    <image id="carImage" src='./asset/car.svg'/>
+                    
+                </div>
+                <div id='car2'>
+                    <image id="carImage" src='./asset/car.svg'/>
+                </div>
+                <div id='car3'>
+                    <image id="carImage" src='./asset/car.svg'/>
+                    
+                </div>
+                <div id='car4'>
+                    <image id="carImage" src='./asset/car.svg'/>
+                    
+                </div>
+            </div>
+               
+            <div class="form-group">
                 <label>Parking Status Result:</label>
                 <input type="textArea" placeholder="Place Holder for search result" ng-model='parkingStatus.found' class="form-control">
             </div>
-
             <div class="form-group narrow-button">
                 <button class="btn btn-primary" ng-click='parkingStatus.refresh()'>Refresh Parking Data!</button>
             </div>
@@ -62,17 +84,14 @@
             <table class="table">
                 <tr>
                     <td>
-                        <button type="button"  ng-class="{'btn btn-danger':false, 'btn btn-success':true}" >Parking 1</button>
+                        <button type="button" ng-class="{'btn btn-danger':false, 'btn btn-success':true}">Parking 1</button>
                     </td>
-                    
                 </tr>
                 <td>
                     <button type="button" ng-class="{'btn btn-danger':false, 'btn btn-success':true}">Parking 2</button>
                 </td>
                 <tr></tr>
             </table>
-
-        </div>
-
+            
     </body>
 </html>
