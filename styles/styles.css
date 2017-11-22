@@ -163,6 +163,7 @@ div#car1 {
     top: -321px;
     left: 16%;
     position: relative;
+	
 }
 div#car2 {
     width: 32%;
@@ -176,6 +177,7 @@ div#car3 {
     top: -489px;
     left: 52%;
     position: relative;
+    
 }
 
 div#car4 {
@@ -185,7 +187,7 @@ div#car4 {
     position: relative;
 }
 
-
+/*
 div#pulse {
     width: 5px;
     height: 5px;
@@ -197,7 +199,7 @@ div#pulse {
     left: 50%;
     margin: -25px 0px 0px -25px;
 }
-
+*/
 @keyframes out {
   0% {box-shadow: 0px 0px 0px 0px rgba(888, 0, 0, 1);} 
   100% {box-shadow: 0px 0px 0px 50px rgba(0, 0, 0, 0.0);}

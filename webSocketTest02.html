@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app=YOUR_APP>
+	<head>
+
+		<title>Parking status</title>
+		<script type="text/javascript" src="./angular.min.js"></script>
+		<script type="text/javascript" src="bower_components/angularjs-mqtt/browserMqtt.js"></script>
+		<script type="text/javascript" src="bower_components/angularjs-mqtt/mqtt.js"></script>
+		<script type="text/javascript">
+			angular.module('YOUR_APP',['kmqtt']).
+			controller('MqttCtrl', function($scope, kmqtt) {
+				var client = kmqtt.connect('ws://127.0.0.1:8880');
+				console.log("created client",client);
+				client.on("message", function(topic, payload) {
+					console.log(topic, payload.toString());
+				});
+
+				client.subscribe('sensors/esp8266/parking/#');
+				//client.publish('sensors/esp8266/parking/', 'a test message');
+			})
+				</script>
+
+	</head>
+
+	<body ng-controller='MqttCtrl'>
+		test {{}}
+	</body>
+</html>

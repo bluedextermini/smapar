@@ -1,9 +1,51 @@
 (function() {
     'use strict';
 
-    angular.module('SmartParkingSystem', []).service('ParkingStatusService', ParkingStatusService).controller('ParkingStatus', ParkingStatus);
+    /*angular.module('SmartParkingSystem', []).service('ParkingStatusService', ParkingStatusService).controller('ParkingStatus', ParkingStatus);*/
+	
+	angular.module('SmartParkingSystem',['kmqtt']).
+			controller('parkingStatus', function($scope, kmqtt) {
+				this.p1=false;
+				this.p2=false;
+				this.p3=false;
+				this.p4=false;
+				
+				var client = kmqtt.connect('ws://127.0.0.1:8880');
+				console.log("created client",client);
+				$scope.$apply(function() {
+					client.on("message", function(topic, payload) {
+							
+							console.log(topic, payload.toString());
+							var recentParkingStatusChanged=topic.substr(topic.lastIndexOf('/')+1,topic.length);
+							console.log("Parking:"+recentParkingStatusChanged);
+							switch(recentParkingStatusChanged){
+								case 'p1':
+									this.p1=(payload.toString()=='1')?true:false;
+									break;
+								case 'p2':
+									this.p2=(payload.toString()=='1')?true:false;
+									break;
+								case 'p3':
+									this.p3=(payload.toString()=='1')?true:false;
+									break;
+								case 'p4':
+									this.p4=(payload.toString()=='1')?true:false;
+									break;	
+							}
+											
+					});					
+				});
+				
 
-    ParkingStatus.$inject = ['ParkingStatusService'];
+
+				client.subscribe('sensors/esp8266/parking/#');
+				//client.publish('sensors/esp8266/parking/', 'a test message');
+			});
+			
+	
+	
+	
+    /*ParkingStatus.$inject = ['ParkingStatusService'];
     function ParkingStatus(ParkingStatusService) {
         var status = this;
         //search.searchTerm="";
@@ -46,6 +88,9 @@
             return deferred.promise;
         }
 
-    }
+    }*/
+	
+	
+	
 
 }());

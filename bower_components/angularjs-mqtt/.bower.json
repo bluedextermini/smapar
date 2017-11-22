@@ -1,0 +1,33 @@
+{
+  "name": "angularjs-mqtt",
+  "authors": [
+    "Nguyen Sy Thanh Son <thanhson1085@gmail.com>"
+  ],
+  "description": "Angular Provider to hander a MQTT connection",
+  "main": "mqtt.js",
+  "keywords": [
+    "mqtt"
+  ],
+  "license": "MIT",
+  "homepage": "https://sonnguyen.ws",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8"
+  },
+  "_release": "f92c1b49cd",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f92c1b49cd5c540df3548a324108aaffe28667a0"
+  },
+  "_source": "https://github.com/thanhson1085/angularjs-mqtt.git",
+  "_target": "*",
+  "_originalSource": "angularjs-mqtt",
+  "_direct": true
+}
