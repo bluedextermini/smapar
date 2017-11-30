@@ -5,14 +5,14 @@
 	
 	angular.module('SmartParkingSystem',['kmqtt']).
 			controller('parkingStatus', function($scope, kmqtt) {
-				this.p1=false;
-				this.p2=false;
-				this.p3=false;
-				this.p4=false;
+				$scope.p1=false;
+				$scope.p2=false;
+				$scope.p3=false;
+				$scope.p4=false;
 				
 				var client = kmqtt.connect('ws://127.0.0.1:8880');
 				console.log("created client",client);
-				$scope.$apply(function() {
+			
 					client.on("message", function(topic, payload) {
 							
 							console.log(topic, payload.toString());
@@ -20,21 +20,22 @@
 							console.log("Parking:"+recentParkingStatusChanged);
 							switch(recentParkingStatusChanged){
 								case 'p1':
-									this.p1=(payload.toString()=='1')?true:false;
+									$scope.p1=(payload.toString()=='1')?true:false;
 									break;
 								case 'p2':
-									this.p2=(payload.toString()=='1')?true:false;
+									$scope.p2=(payload.toString()=='1')?true:false;
 									break;
 								case 'p3':
-									this.p3=(payload.toString()=='1')?true:false;
+									$scope.p3=(payload.toString()=='1')?true:false;
 									break;
 								case 'p4':
-									this.p4=(payload.toString()=='1')?true:false;
+									$scope.p4=(payload.toString()=='1')?true:false;
 									break;	
 							}
+							$scope.$apply();
 											
 					});					
-				});
+				
 				
 
 

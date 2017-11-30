@@ -13,7 +13,7 @@
 
 
 
-				<body ng-app='SmartParkingSystem' ng-controller='parkingStatus as parkingStatus'>
+				<body ng-app='SmartParkingSystem' ng-controller='parkingStatus'>
 					<div class="navbar-brand">Smart Parking System</div>
 					<nav class="navbar navbar-expand-lg navbar-light bg-light">
 						<a class="navbar-brand" href="#">SPS</a>
@@ -61,19 +61,19 @@
 							<div id='carParkingStatus'>
 
 								<image class='parking' src='./asset/parking.svg'/>
-								<div id='car1'>{{parkingStatus.p1}}
-									<image id="carImage" src='./asset/car-park-avlbl.svg'/>
+								<div id='car1'>
+									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p1 && './asset/car-park-avlbl.svg' || './asset/car-park-full.svg'}}"/>
 
 								</div>
-								<div id='car2'>{{parkingStatus.p2}}
-									<image id="carImage" src='./asset/car-park-avlbl.svg'/>
+								<div id='car2'>
+									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p2 && './asset/car-park-avlbl.svg' || './asset/car-park-full.svg'}}"/>
 								</div>
 								<div id='car3'>
-									<image id="carImage" src='./asset/car-park-avlbl.svg'/>
+									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p3 && './asset/car-park-avlbl.svg' || './asset/car-park-full.svg'}}"/>
 
 								</div>
 								<div id='car4'>
-									<image id="carImage" src='./asset/car-park-full.svg'/>
+									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p4 && './asset/car-park-avlbl.svg' || './asset/car-park-full.svg'}}"/>
 
 								</div>
 							</div>
