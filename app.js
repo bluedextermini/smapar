@@ -3,24 +3,35 @@
 
     /*angular.module('SmartParkingSystem', []).service('ParkingStatusService', ParkingStatusService).controller('ParkingStatus', ParkingStatus);*/
 	
-	angular.module('SmartParkingSystem',['kmqtt']).
+	angular.module('SmartParkingSystem',['kmqtt','angularjs-gauge']).
 			controller('parkingStatus', function($scope, kmqtt) {
 				$scope.p1=false;
 				$scope.p2=false;
 				$scope.p3=false;
 				$scope.p4=false;
-				
+				$scope.free=0;
+				$scope.totalParking=4;
+				$scope.thresholdOptions = {
+							'0': { color: 'green' },
+							'50': {color: 'orange' },
+							'75': {color: 'red'}
+					   };
+
+
 				var client = kmqtt.connect('ws://127.0.0.1:8880');
 				console.log("created client",client);
 			
 					client.on("message", function(topic, payload) {
+					
 							
 							console.log(topic, payload.toString());
 							var recentParkingStatusChanged=topic.substr(topic.lastIndexOf('/')+1,topic.length);
 							console.log("Parking:"+recentParkingStatusChanged);
 							switch(recentParkingStatusChanged){
 								case 'p1':
+								    //1== free,true , 0= occupied, false
 									$scope.p1=(payload.toString()=='1')?true:false;
+									
 									break;
 								case 'p2':
 									$scope.p2=(payload.toString()=='1')?true:false;
@@ -32,6 +43,11 @@
 									$scope.p4=(payload.toString()=='1')?true:false;
 									break;	
 							}
+							$scope.free=0;
+							$scope.free+=($scope.p1)?1:0;
+							$scope.free+=($scope.p2)?1:0;
+							$scope.free+=($scope.p3)?1:0;
+							$scope.free+=($scope.p4)?1:0;
 							$scope.$apply();
 											
 					});					

@@ -9,6 +9,7 @@
 				<script type="text/javascript" src="./angular.min.js"></script>
 				<script type="text/javascript" src="bower_components/angularjs-mqtt/browserMqtt.js"></script>
 				<script type="text/javascript" src="bower_components/angularjs-mqtt/mqtt.js"></script>
+				<script type="text/javascript" src="bower_components/angularjs-gauge/angularjs-gauge.js"></script>
 				<script src="app.js" charset="utf-8"></script>
 
 
@@ -43,6 +44,9 @@
 							</div>
 						</nav>
 						<div class="container">
+
+						
+						
 							<div class="livecont">
 								<div class="light blink"></div>
                 LIVE
@@ -57,6 +61,25 @@
 
 
 							</h1>
+						<section>
+						
+						<ng-gauge size="200" type="full" thick="10" 
+							  min="0" max="100" value="((totalParking-free)/totalParking*100)" 
+							  cap="round" label="Parking Used" append="%" thresholds="thresholdOptions"
+							  foreground-color="red" background-color="#EEE">
+						</ng-gauge>
+						
+						</section>
+						<section>
+						
+						<ng-gauge size="200" type="full" thick="10" 
+							  min="0" max="100" value="free/totalParking*100" 
+							  cap="round" label="Free Parking" append="%" thresholds="thresholdOptions1"
+							  foreground-color="green" background-color="#EEE">
+						</ng-gauge>
+						
+						</section>
+						<section>
 
 							<div id='carParkingStatus'>
 
@@ -77,28 +100,10 @@
 
 								</div>
 							</div>
-							<!-- <div id="pulse"> test</div> -->
-
-							<!--             <div class="form-group">
-                <label>Parking Status Result:</label>
-                <input type="textArea" placeholder="Place Holder for search result" ng-model='parkingStatus.found' class="form-control">
-            </div>
-            <div class="form-group narrow-button">
-                <button class="btn btn-primary" ng-click='parkingStatus.refresh()'>Refresh Parking Data!</button>
-            </div> -->
-							<!-- found-items should be implemented as a component -->
-							<!--     <found-items ng-if='search.isButtonClicked' found='search.found' on-remove='search.remove(index)'></found-items> -->
-							<!--  <table class="table">
-                <tr>
-                    <td>
-                        <button type="button" ng-class="{'btn btn-danger':false, 'btn btn-success':true}">Parking 1</button>
-                    </td>
-                </tr>
-                <td>
-                    <button type="button" ng-class="{'btn btn-danger':false, 'btn btn-success':true}">Parking 2</button>
-                </td>
-                <tr></tr>
-            </table> -->
+							</section>
+						
+							
+							</div>
 
 						</body>
 					</html>
