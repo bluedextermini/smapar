@@ -91,10 +91,19 @@ input[type="text"] {
   z-index: 999;
 }
 
-.light.blink {
+.light.live {
   width: 13px;
   height: 13px;
   background: red;
+  border-radius: 10px;
+  margin: 0px 2px -1px 0;
+  display: inline-block;
+}
+
+.light.offline {
+  width: 13px;
+  height: 13px;
+  background: grey;
   border-radius: 10px;
   margin: 0px 2px -1px 0;
   display: inline-block;
@@ -127,7 +136,7 @@ input[type="text"] {
   }
 }
 
-.blink {
+.live {
   -webkit-animation: blink .7s alternate infinite;
   -moz-animation: blink .7s alternate infinite;
   -ms-animation: blink .7s alternate infinite;
@@ -163,7 +172,7 @@ div#car1 {
     top: -321px;
     left: 16%;
     position: relative;
-	
+
 }
 div#car2 {
     width: 32%;
@@ -177,7 +186,7 @@ div#car3 {
     top: -489px;
     left: 52%;
     position: relative;
-    
+
 }
 
 div#car4 {
@@ -201,6 +210,6 @@ div#pulse {
 }
 */
 @keyframes out {
-  0% {box-shadow: 0px 0px 0px 0px rgba(888, 0, 0, 1);} 
+  0% {box-shadow: 0px 0px 0px 0px rgba(888, 0, 0, 1);}
   100% {box-shadow: 0px 0px 0px 50px rgba(0, 0, 0, 0.0);}
 }

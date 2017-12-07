@@ -2,14 +2,16 @@
     'use strict';
 
     /*angular.module('SmartParkingSystem', []).service('ParkingStatusService', ParkingStatusService).controller('ParkingStatus', ParkingStatus);*/
-	
+
 	angular.module('SmartParkingSystem',['kmqtt','angularjs-gauge']).
 			controller('parkingStatus', function($scope, kmqtt) {
 				$scope.p1=false;
 				$scope.p2=false;
 				$scope.p3=false;
 				$scope.p4=false;
-				$scope.free=0;
+        $scope.connected=false;
+
+				$scope.occupied=0;
 				$scope.totalParking=4;
 				$scope.thresholdOptions = {
 							'0': { color: 'green' },
@@ -20,18 +22,32 @@
 
 				var client = kmqtt.connect('ws://127.0.0.1:8880');
 				console.log("created client",client);
-			
-					client.on("message", function(topic, payload) {
+				console.log("created client",client.connected);
+					client.on('connect', function () {
+					  $scope.connected=true;
+					  $scope.$apply();
+					});
+					client.on('offline', function () {
+					  $scope.connected=false;
+					  $scope.$apply();
+					});
+					client.on('close', function () {
+					  $scope.connected=false;
+					  $scope.$apply();
+					});
 					
-							
+
+					client.on("message", function(topic, payload) {
+
+
 							console.log(topic, payload.toString());
 							var recentParkingStatusChanged=topic.substr(topic.lastIndexOf('/')+1,topic.length);
 							console.log("Parking:"+recentParkingStatusChanged);
 							switch(recentParkingStatusChanged){
 								case 'p1':
-								    //1== free,true , 0= occupied, false
+								    //1== occupied,true , 0= free, false
 									$scope.p1=(payload.toString()=='1')?true:false;
-									
+
 									break;
 								case 'p2':
 									$scope.p2=(payload.toString()=='1')?true:false;
@@ -41,27 +57,27 @@
 									break;
 								case 'p4':
 									$scope.p4=(payload.toString()=='1')?true:false;
-									break;	
+									break;
 							}
-							$scope.free=0;
-							$scope.free+=($scope.p1)?1:0;
-							$scope.free+=($scope.p2)?1:0;
-							$scope.free+=($scope.p3)?1:0;
-							$scope.free+=($scope.p4)?1:0;
+							$scope.occupied=0;
+							$scope.occupied+=($scope.p1)?1:0;
+							$scope.occupied+=($scope.p2)?1:0;
+							$scope.occupied+=($scope.p3)?1:0;
+							$scope.occupied+=($scope.p4)?1:0;
 							$scope.$apply();
-											
-					});					
-				
-				
+
+					});
+
+
 
 
 				client.subscribe('sensors/esp8266/parking/#');
 				//client.publish('sensors/esp8266/parking/', 'a test message');
 			});
-			
-	
-	
-	
+
+
+
+
     /*ParkingStatus.$inject = ['ParkingStatusService'];
     function ParkingStatus(ParkingStatusService) {
         var status = this;
@@ -106,8 +122,8 @@
         }
 
     }*/
-	
-	
-	
+
+
+
 
 }());

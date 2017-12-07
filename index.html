@@ -45,39 +45,34 @@
 						</nav>
 						<div class="container">
 
-						
-						
+
+
 							<div class="livecont">
-								<div class="light blink"></div>
-                LIVE
-
-
-
-
-
+								<div ng-class="{'light live': connected, 'light offline': !connected}"></div>
+                <span>{{(connected)?"LIVE":"OFFLINE"}}</span>
 							</div>
-							<h1>Parking Status  
+							<h1>Parking Status
 
 
 
 							</h1>
 						<section>
-						
-						<ng-gauge size="200" type="full" thick="10" 
-							  min="0" max="100" value="((totalParking-free)/totalParking*100)" 
+
+						<ng-gauge size="200" type="full" thick="10"
+							  min="0" max="100" value="(occupied/totalParking*100)"
 							  cap="round" label="Parking Used" append="%" thresholds="thresholdOptions"
 							  foreground-color="red" background-color="#EEE">
 						</ng-gauge>
-						
+
 						</section>
 						<section>
-						
-						<ng-gauge size="200" type="full" thick="10" 
-							  min="0" max="100" value="free/totalParking*100" 
+
+						<ng-gauge size="200" type="full" thick="10"
+							  min="0" max="100" value="(totalParking-occupied)/totalParking*100"
 							  cap="round" label="Free Parking" append="%" thresholds="thresholdOptions1"
 							  foreground-color="green" background-color="#EEE">
 						</ng-gauge>
-						
+
 						</section>
 						<section>
 
@@ -85,26 +80,25 @@
 
 								<image class='parking' src='./asset/parking.svg'/>
 								<div id='car1'>
-									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p1 && './asset/car-park-avlbl.svg' || './asset/car-park-full.svg'}}"/>
+									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p1 && './asset/car-park-full.svg' || './asset/car-park-avlbl.svg'}}"/>
 
 								</div>
 								<div id='car2'>
-									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p2 && './asset/car-park-avlbl.svg' || './asset/car-park-full.svg'}}"/>
+									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p2 && './asset/car-park-full.svg' || './asset/car-park-avlbl.svg'}}"/>
 								</div>
 								<div id='car3'>
-									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p3 && './asset/car-park-avlbl.svg' || './asset/car-park-full.svg'}}"/>
+									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p3 && './asset/car-park-full.svg' || './asset/car-park-avlbl.svg'}}"/>
 
 								</div>
 								<div id='car4'>
-									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p4 && './asset/car-park-avlbl.svg' || './asset/car-park-full.svg'}}"/>
+									<image id="carImage" src='./asset/car-park-avlbl.svg' ng-src="{{p4 && './asset/car-park-full.svg' || './asset/car-park-avlbl.svg'}}"/>
 
 								</div>
 							</div>
 							</section>
-						
-							
+
+
 							</div>
 
 						</body>
 					</html>
-					
