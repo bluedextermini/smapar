@@ -213,3 +213,10 @@ div#pulse {
   0% {box-shadow: 0px 0px 0px 0px rgba(888, 0, 0, 1);}
   100% {box-shadow: 0px 0px 0px 50px rgba(0, 0, 0, 0.0);}
 }
+
+
+ .grid-container {
+    display: grid;
+    grid-template-columns: 250px 250px;
+    grid-gap: 20px;
+}

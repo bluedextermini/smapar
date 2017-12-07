@@ -56,24 +56,25 @@
 
 
 							</h1>
-						<section>
-
-						<ng-gauge size="200" type="full" thick="10"
+							
+						<div class="grid-container">
+							<div class="item-1">
+							<ng-gauge size="200" type="full" thick="10"
 							  min="0" max="100" value="(occupied/totalParking*100)"
 							  cap="round" label="Parking Used" append="%" thresholds="thresholdOptions"
 							  foreground-color="red" background-color="#EEE">
-						</ng-gauge>
-
-						</section>
-						<section>
-
-						<ng-gauge size="200" type="full" thick="10"
-							  min="0" max="100" value="(totalParking-occupied)/totalParking*100"
-							  cap="round" label="Free Parking" append="%" thresholds="thresholdOptions1"
-							  foreground-color="green" background-color="#EEE">
-						</ng-gauge>
-
-						</section>
+							</ng-gauge>
+							</div>
+							<div class="item-2">
+								<ng-gauge size="200" type="full" thick="10"
+									  min="0" max="100" value="(totalParking-occupied)/totalParking*100"
+									  cap="round" label="Free Parking" append="%" thresholds="thresholdOptions1"
+									  foreground-color="green" background-color="#EEE">
+								</ng-gauge>							
+							</div>
+            
+						</div>
+						
 						<section>
 
 							<div id='carParkingStatus'>
